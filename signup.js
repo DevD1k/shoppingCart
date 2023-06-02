@@ -1,7 +1,4 @@
 "use strict";
-// myProducts.filter((item)=>item.title.includes(search.value))
-
-// myCartProductArray = myProducts.filter((item)=> myCartIDs.includes(item.id))
 
 const firstName = document.getElementById("first-name-input");
 const lastName = document.getElementById("last-name-input");
@@ -20,8 +17,6 @@ function generateToken() {
   }
   return res;
 }
-// localStorage.clear();
-// let curUser;
 let parsedData = JSON.parse(localStorage.getItem("userData")) || [];
 signupBtn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -38,7 +33,6 @@ signupBtn.addEventListener("click", (e) => {
   } else if (password.value != password2.value) {
     alert("password and confirm password are not same!!");
   } else {
-    // var existingData = localStorage.getItem("userData");
     var newData = {
       // Add your user data properties here
       firstName: firstName.value,
@@ -55,33 +49,9 @@ signupBtn.addEventListener("click", (e) => {
       // return;
     } else {
       parsedData.push(newData);
-      console.log(parsedData);
       localStorage.setItem("userData", JSON.stringify(parsedData));
       localStorage.setItem("presentUser", JSON.stringify(newData));
       window.location.assign("./profile/profile.html");
     }
-    // if (parsedData) {
-    //   parsedData.filter((x) => {
-    //     console.log(parsedData.email);
-    //     if (x.email == newData.email) {
-    //       alert("You are already a registered user, please do login!!");
-    //       return;
-    //     }
-    //   });
-    // } else if (parsedData) {
-    // }
-    // Create a new data array with the new data object
-    // parsedData = [newData];
-
-    // Step 4: Store the updated data back into local storage
-
-    // if(JSON.parse(localStorage.getItem('arr'))!==undefined){
-    // localStorage.setItem('user',JSON.stringify(user));
-
-    // localStorage.setItem('arr',JSON.stringify(arr));
-    // const link = document.createElement("a");
-    // document.body.appendChild(link);
-    // link.click();
-    // link.remove();
   }
 });

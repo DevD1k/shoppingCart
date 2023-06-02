@@ -2,7 +2,6 @@
 
 let allAcc = JSON.parse(localStorage.getItem("userData"));
 let curAcc = JSON.parse(localStorage.getItem("presentUser"));
-console.log(curAcc);
 
 const fName = document.getElementById("first-name-input");
 const lName = document.getElementById("last-name-input");

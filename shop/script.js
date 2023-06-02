@@ -14,7 +14,6 @@ let productsArr;
 let productsArrComplete;
 let cartArr = [];
 let cartArrLocal = [];
-// let cartTotal;
 
 function randomColor() {
   let arr = ["red", "blue", "black", "white", "green"];
@@ -121,11 +120,9 @@ function cartAdd(data) {
 
   document.querySelector(".cancel").addEventListener("click", () => {
     document.querySelector(".cancel").closest(".row").innerHTML = "";
-    // cartAdd(cartArr)
   });
 }
 
-// console.log(document.querySelector(".final-total"));
 fetch("https://fakestoreapi.com/products")
   .then((response) => {
     if (!response.ok)
@@ -165,7 +162,6 @@ fetch("https://fakestoreapi.com/products")
       });
       womenFilter.classList.add("active");
       let showWomens = data.filter((item) => item.title.includes("Women"));
-      // console.log(showMens);
       createShopItems(showWomens);
     });
 
@@ -315,7 +311,6 @@ fetch("https://fakestoreapi.com/products")
         .closest("li")
         .querySelector("input[type='checkbox']");
       const priceInp = checkboxElement.id;
-      // console.log(priceInp);
 
       if (!checkboxElement.checked) {
         createShopItems(productsArrComplete);
@@ -344,14 +339,11 @@ fetch("https://fakestoreapi.com/products")
 
     const cartBtn = document.querySelectorAll(".addBtn");
     const cartDisplay = document.querySelector(".cart-container");
-    console.log(cartBtn);
     cartBtn.forEach((itm) => {
       itm.addEventListener("click", (e) => {
         cartDisplay.style.display = "block";
         e.stopPropagation();
-        // console.log(e.target);
         let cartwork = e.target.closest(".item");
-        // console.log(cartwork);
         cartArr.push(cartwork);
         cartAdd(cartwork);
       });
@@ -361,12 +353,10 @@ fetch("https://fakestoreapi.com/products")
       const isClickedInsideCart = cartDisplay.contains(e.target);
       if (!isClickedInsideCart) {
         cartDisplay.style.display = "none";
-        // console.log("Cart hidden");
       }
     });
 
     document.querySelector("#checkout-btn").addEventListener("click", () => {
-      // localStorage.setItem("cartData", undefined);
       alert("The items were purchased");
       window.location.href = "../razorpay/index.html";
     });

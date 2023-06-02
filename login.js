@@ -9,10 +9,7 @@ loginBtn.addEventListener("click", (e) => {
 
   if (email.value == `` || password.value == ``) {
     alert("All Feilds are mandotary!!");
-    // } else if (password.value.length < 8) {
-    //   alert("Password must contain at least 8 characters!!");
   } else {
-    // let arr=JSON.parse(localStorage.getItem('user'));
     const z = JSON.parse(localStorage.getItem("userData"));
     console.log(z);
     let localData = z;

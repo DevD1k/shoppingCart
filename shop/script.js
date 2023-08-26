@@ -44,7 +44,10 @@ function createShopItems(data) {
   data.forEach((item) => {
     if (item.title.includes("Men")) {
       let html = `<div class="item">
-                  <img src=${item.image} alt="Item" />
+                  <img src=${item.image} class='tite' alt="${item.title.slice(
+        0,
+        15
+      )}..." />
                   <div class="info">
                   <div class="row">
                     <div class="price">$${item.price}</div>
@@ -53,9 +56,15 @@ function createShopItems(data) {
                   <div class="colors">
                     Colors:
                     <div class="row">
-                      <div class="circle" style="background-color: ${item.color[0]}"></div>
-                      <div class="circle" style="background-color: ${item.color[1]}"></div>
-                      <div class="circle" style="background-color: ${item.color[2]}"></div>
+                      <div class="circle" style="background-color: ${
+                        item.color[0]
+                      }"></div>
+                      <div class="circle" style="background-color: ${
+                        item.color[1]
+                      }"></div>
+                      <div class="circle" style="background-color: ${
+                        item.color[2]
+                      }"></div>
                     </div>
                   </div>
                   <div class="row">Rating: ${item.rating.rate}</div>
@@ -69,7 +78,7 @@ function createShopItems(data) {
       !item.title.includes("Bracelet")
     ) {
       let html = `<div class="item">
-                  <img src=${item.image} alt="Item" />
+                  <img src=${item.image} class='tite' alt="${item.title}"  />
                   <div class="info">
                   <div class="row">
                     <div class="price">$${item.price}</div>
@@ -94,16 +103,20 @@ function createShopItems(data) {
 }
 
 function cartAdd(data) {
+  // console.log(data);
   let price = parseInt(
     data.querySelector(".price").textContent.replace("$", "")
   );
   let cartTotal = cartArr.reduce((acc, item) => {
     return acc + parseInt(item.innerText.split("\n")[0].replace("$", ""));
   }, 0);
+  const title = data.querySelector("img").getAttribute("alt");
+  const title1 = data.querySelector("img");
+  // console.log(title, title1);
   let html = `<div class="row">
-  <div class="title">Shirt<span
+  <div class="title">${title}...<span
   ><i
-    class="fa fa-minus-circle cancel"
+    // class="fa fa-minus-circle cancel"
     style="font-size: 18px; color: red; margin-left: 5px"
   ></i
 ></span></div>
@@ -111,14 +124,18 @@ function cartAdd(data) {
   </div>`;
   document.querySelector(".info").insertAdjacentHTML("afterbegin", html);
   document.querySelector(".final-total").textContent = cartTotal;
-  console.log(cartArr[0].innerText.split("\n")[0]);
-  console.log(cartArr);
+  // console.log(cartArr[0].innerText.split("\n")[0]);
+  // console.log(cartArr);
   let curtotal = {
     price: cartTotal,
   };
   localStorage.setItem("cartData", JSON.stringify(curtotal));
 
   document.querySelector(".cancel").addEventListener("click", () => {
+    // console.log(document.querySelector(".cancel").closest(".item"));
+    cartArr = cartArr.filter((item) => {
+      return item;
+    });
     document.querySelector(".cancel").closest(".row").innerHTML = "";
   });
 }
@@ -243,7 +260,7 @@ fetch("https://fakestoreapi.com/products")
         .closest("li")
         .querySelector("input[type='checkbox']");
       const sizeInp = checkboxElement.id;
-      console.log(sizeInp);
+      // console.log(sizeInp);
 
       if (!checkboxElement.checked) {
         createShopItems(productsArrComplete);
